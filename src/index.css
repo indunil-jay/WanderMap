@@ -6,6 +6,18 @@
 
 :root {
   --font-montserrat: "Montserrat", sans-serif;
+
+  --color-primary: 0, 196, 106;
+  --color-secondary: 255, 181, 69;
+
+  --color-white: 255, 255, 255;
+  --color-light-1: 236, 236, 236;
+  --color-gray-1: 214, 222, 224;
+  --color-gray-2: 170, 170, 170;
+
+  --color-dark-1: 36, 42, 46;
+  --color-dark-2: 45, 52, 57;
+  --color-dark-3: 66, 72, 77;
 }
 
 *,
@@ -21,6 +33,6 @@ html {
 
 @layer base {
   body {
-    @apply font-normal not-italic font-montserrat;
+    @apply font-normal not-italic font-montserrat text-light-1;
   }
 }

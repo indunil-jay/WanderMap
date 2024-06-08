@@ -1,7 +1,11 @@
-import React from "react";
+import Hero from "../components/Hero";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <main className="bg-hero-image h-screen w-screen bg-cover bg-center bg-no-repeat p-[4rem] ">
+      <Hero />
+    </main>
+  );
 };
 
 export default HomePage;
