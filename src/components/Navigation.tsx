@@ -1,20 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { navigation } from "../constant";
 import Button from "./Button";
+import AppLogo from "./AppLogo";
 
 const Navigation = () => {
   const { pathname } = useLocation();
 
   return (
     <nav className="flex justify-between items-center">
-      <div>
-        <Link
-          to="/"
-          className="text-[2.8rem] text-white font-semibold cursor-pointer transition-colors hover:gradient-text-type-1"
-        >
-          WanderMap
-        </Link>
-      </div>
+      <AppLogo />
       <div className="flex items-center  gap-4">
         <ul className="flex gap-4 ">
           {navigation.map((item) => (

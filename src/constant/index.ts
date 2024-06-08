@@ -11,7 +11,20 @@ export const navigation = [
   },
   {
     id: 3,
-    url: "/how-to-use",
-    name: "How to work",
+    url: "/how-it-works",
+    name: "How it works",
+  },
+];
+
+export const appnavigation = [
+  {
+    id: 1,
+    url: "/app/destinations",
+    name: "destinations",
+  },
+  {
+    id: 2,
+    url: "/app/countries",
+    name: "countries",
   },
 ];
