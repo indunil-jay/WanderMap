@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import AppLayout from "./pages/AppLayout";
 import DestinationList from "./components/DestinationList";
 import { useEffect, useState } from "react";
+import CountriesList from "./components/CountriesList";
 
 const URL = "http://localhost:8000";
 
@@ -34,7 +35,6 @@ const App = () => {
         const response = await fetch(`${URL}/destinations`);
         const data: IDestination[] = await response.json();
         setDestinations(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -68,7 +68,15 @@ const App = () => {
               />
             }
           />
-          <Route path="countries" element={<p>countries</p>} />
+          <Route
+            path="countries"
+            element={
+              <CountriesList
+                destinations={destinations}
+                isLoading={isLoading}
+              />
+            }
+          />
           <Route path="form" element={<p>Form</p>} />
         </Route>
 
