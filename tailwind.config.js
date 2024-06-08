@@ -28,10 +28,19 @@ export default {
       fontFamily: {
         montserrat: "var(--font-montserrat)",
       },
-
       backgroundImage: {
         "hero-image":
           "linear-gradient(to right bottom, rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('./src/assets/home-cover.jpg')",
+      },
+      keyframes: {
+        rotate: {
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
+      },
+      animation: {
+        spin: "rotate 2s infinite linear",
       },
     },
   },

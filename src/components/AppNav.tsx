@@ -3,7 +3,6 @@ import { appnavigation } from "../constant";
 
 const AppNav = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <nav className="mt-[3rem] mb-[2rem]">
