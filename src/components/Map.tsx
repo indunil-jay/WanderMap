@@ -1,33 +1,87 @@
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { LeafletMouseEvent } from "leaflet";
+import { useGeolocation } from "../hooks/useGeoLocation";
+import Button from "./Button";
 
 const Map = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [mapPosition, setMapPosition] = useState<[number, number]>([90, 119]);
+  const { geoPosition, getPosition, isGeoLocationLoading } = useGeolocation();
 
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
+  const lat = Number(searchParams.get("lat"));
+  const lng = Number(searchParams.get("lng"));
+
+  useEffect(() => {
+    if (lat && lng) {
+      setMapPosition([lat, lng]);
+    }
+  }, [lat, lng]);
+
+  useEffect(() => {
+    if (geoPosition) {
+      setMapPosition([geoPosition.lat, geoPosition.lng]);
+    }
+  }, [geoPosition]);
 
   return (
-    <div
-      className="flex-1  bg-dark-3 relative"
-      onClick={() => navigate("form")}
-    >
-      <h1>MAp</h1>
-      <h1>
-        {lat}:{lng}
-      </h1>
-      <button
-        onClick={() => {
-          setSearchParams({
-            lat: "123",
-            lng: "456",
-          });
-        }}
+    <div className="flex-1  bg-dark-3 relative isolate">
+      {geoPosition && (
+        <div className="absolute !z-[99999999999] bottom-10 right-10">
+          <Button onClick={getPosition}>
+            {isGeoLocationLoading ? "Loading..." : "USE YOUR LOCATION"}
+          </Button>
+        </div>
+      )}
+      <MapContainer
+        center={mapPosition}
+        zoom={6}
+        scrollWheelZoom={true}
+        className="h-full"
       >
-        set new
-      </button>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={mapPosition}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+        <ChangeCenter position={mapPosition} />
+        <DetectClick />
+      </MapContainer>
     </div>
   );
+};
+
+interface ICenterMap {
+  position: [number, number];
+}
+
+const ChangeCenter = ({ position }: ICenterMap) => {
+  const map = useMap();
+  map.setView(position, 6);
+  return null;
+};
+
+const DetectClick = () => {
+  const navigate = useNavigate();
+  useMapEvents({
+    click: (e: LeafletMouseEvent) =>
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+  });
+
+  return null;
 };
 
 export default Map;
