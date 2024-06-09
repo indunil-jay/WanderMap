@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import Navigation from "./Navigation";
 
@@ -26,7 +27,9 @@ const Hero = () => {
         </p>
 
         <div className="mt-10">
-          <Button> Start Pin Journeys &rarr;</Button>
+          <Button>
+            <Link to="app">Start Pin Journeys &rarr;</Link>
+          </Button>
         </div>
       </div>
     </div>

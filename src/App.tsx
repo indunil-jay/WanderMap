@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import AppGuide from "./pages/AppGuide";
@@ -8,6 +8,8 @@ import AppLayout from "./pages/AppLayout";
 import DestinationList from "./components/DestinationList";
 import { useEffect, useState } from "react";
 import CountriesList from "./components/CountriesList";
+import DestinationDetails from "./components/DestinationDetails";
+import Form from "./components/Form";
 
 const URL = "http://localhost:8000";
 
@@ -50,15 +52,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/app" element={<AppLayout />}>
-          <Route
-            index
-            element={
-              <DestinationList
-                destinations={destinations}
-                isLoading={isLoading}
-              />
-            }
-          />
+          <Route index element={<Navigate to="destinations" replace />} />
           <Route
             path="destinations"
             element={
@@ -68,6 +62,7 @@ const App = () => {
               />
             }
           />
+          <Route path="destinations/:id" element={<DestinationDetails />} />
           <Route
             path="countries"
             element={
@@ -77,7 +72,7 @@ const App = () => {
               />
             }
           />
-          <Route path="form" element={<p>Form</p>} />
+          <Route path="form" element={<Form />} />
         </Route>
 
         <Route path="/blog" element={<BlogPage />} />
