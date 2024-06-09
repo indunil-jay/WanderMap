@@ -1,10 +1,5 @@
-import { IDestination } from "../App";
+import { useDestination } from "../contexts/Destinations";
 import CountryItem from "./CountryItem";
-
-type Props = {
-  destinations: IDestination[];
-  isLoading: boolean;
-};
 
 export interface IUniqueDestinationCountrty {
   id: number;
@@ -13,7 +8,9 @@ export interface IUniqueDestinationCountrty {
   date: string;
 }
 
-const CountriesList = ({ destinations }: Props) => {
+const CountriesList = () => {
+  const { destinations } = useDestination();
+
   const uniqueDestinations: IUniqueDestinationCountrty[] = destinations.reduce<
     IUniqueDestinationCountrty[]
   >((acc, destination) => {

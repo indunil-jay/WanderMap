@@ -1,14 +1,9 @@
-import { IDestination } from "../App";
+import { useDestination } from "../contexts/Destinations";
 import DestinationItem from "./DestinationItem";
 import Spinner from "./Spinner";
 
-type Props = {
-  destinations: IDestination[];
-  isLoading: boolean;
-};
-
-const DestinationList = ({ isLoading, destinations }: Props) => {
-  console.log(destinations);
+const DestinationList = () => {
+  const { destinations, isLoading } = useDestination();
   if (isLoading) {
     return <Spinner />;
   }

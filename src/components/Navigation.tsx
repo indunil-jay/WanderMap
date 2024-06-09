@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { navigation } from "../constant";
+import { navigation } from "../constants";
 import Button from "./Button";
 import AppLogo from "./AppLogo";
 

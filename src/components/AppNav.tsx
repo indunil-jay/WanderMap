@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { appnavigation } from "../constant";
+import { appnavigation } from "../constants";
 
 const AppNav = () => {
   const { pathname } = useLocation();
