@@ -7,19 +7,21 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LeafletMouseEvent } from "leaflet";
 import { useGeolocation } from "../hooks/useGeoLocation";
 import Button from "./Button";
+import { useURLPosition } from "../hooks/useURLPosition";
 
 const Map = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState<[number, number]>([90, 119]);
   const { geoPosition, getPosition, isGeoLocationLoading } = useGeolocation();
 
-  const lat = Number(searchParams.get("lat"));
-  const lng = Number(searchParams.get("lng"));
+  // const [searchParams] = useSearchParams();
+  // const lat = Number(searchParams.get("lat"));
+  // const lng = Number(searchParams.get("lng"));
+  const { lat, lng } = useURLPosition();
 
   useEffect(() => {
     if (lat && lng) {

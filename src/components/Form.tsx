@@ -1,17 +1,53 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { dateFormater } from "./DestinationItem";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useURLPosition } from "../hooks/useURLPosition";
+import Spinner from "./Spinner";
+
+const REVERSE_GEO_URL =
+  "https://api.bigdatacloud.net/data/reverse-geocode-client?";
 
 const Form = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
   const [dateTime, setDateTime] = useState<string>(
     dateFormater(new Date().toDateString())
   );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
+  const [errorLocation, setErrorLocation] = useState<string>("");
+  const { lat, lng } = useURLPosition();
+
+  useEffect(() => {
+    const fetchDestinationData = async () => {
+      try {
+        setIsLoading(true);
+        setErrorLocation("");
+        const response = await fetch(
+          `${REVERSE_GEO_URL}latitude=${lat}&longitude=${lng}`
+        );
+        const data = await response.json();
+
+        if (!data.countryCode) {
+          throw new Error(
+            "That doesn't seem to be a valid country. Click somewhere else. 😥 "
+          );
+        }
+
+        setDestination(data.city || data.locality || "");
+        setCountry(data.countryName);
+      } catch (error) {
+        setErrorLocation(error?.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchDestinationData();
+  }, [lat, lng]);
 
   const handleDestination = (event: ChangeEvent<HTMLInputElement>) => {
     setDestination(event.target.value);
@@ -26,6 +62,21 @@ const Form = () => {
   const handleSubmit = () => {
     console.log(note, dateTime, destination);
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (errorLocation) {
+    return (
+      <div className="border border-dashed border-secondary bg-secondary/20 rounded-md">
+        <span className="block p-8 text-[20px] text-light-0 font-medium w-[80%] mx-auto text-center">
+          {errorLocation}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-[65vh]">
       <form
@@ -49,7 +100,7 @@ const Form = () => {
           value={dateTime}
           handleChange={handleDateTime}
         >
-          When did you go to?
+          When did you go to {country}?
         </Input>
 
         <TextArea
@@ -58,7 +109,7 @@ const Form = () => {
           value={note}
           handleChange={handleSetNote}
         >
-          Notes about your trip to
+          Notes about your trip to {country}
         </TextArea>
 
         <div className="flex justify-between items-center mt-8">
