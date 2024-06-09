@@ -10,7 +10,7 @@ const DestinationList = () => {
   return (
     <ul className="w-full h-[65vh] list-none overflow-x-hidden overflow-y-scroll flex flex-col gap-3  ">
       {destinations.map((destination) => (
-        <DestinationItem key={destination?.id} destination={destination} />
+        <DestinationItem key={destination.id} destination={destination} />
       ))}
     </ul>
   );

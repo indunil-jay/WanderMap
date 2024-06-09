@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IDestination } from "../App";
+import { IDestination, useDestination } from "../contexts/Destinations";
 
 type Props = {
   destination: IDestination;
@@ -16,10 +16,16 @@ export const dateFormater = (date: string) => {
 
 const DestinationItem = ({ destination }: Props) => {
   const { cityName, id, date, emoji, position } = destination;
+  const { currentDestination } = useDestination();
+
   return (
     <Link
       to={`${id}?destination=${cityName}&lat=${position.lat}&lng=${position.lng}`}
-      className="bg-dark-3 rounded-md px-7 py-3 flex items-center justify-between border-l-[8px] border-primary transition-all hover:shadow-lg shadow-dark-3/70"
+      className={` ${
+        currentDestination?.id === id
+          ? "border-2 border-primary border-l-[8px] "
+          : "border-l-[8px] border-primary"
+      }   bg-dark-3 rounded-md px-7 py-3 flex items-center justify-between  transition-all hover:shadow-lg shadow-dark-3/70`}
     >
       <div className="flex items-center gap-3">
         <p className="w-[3.4rem] h-[2.2rem] bg-light-1 rounded-md">

@@ -5,7 +5,7 @@ export interface IDestination {
   country: string;
   emoji: string;
   date: string;
-  description: string;
+  notes: string;
   position: {
     lat: number;
     lng: number;
@@ -22,6 +22,8 @@ type Props = {
 interface IDestinationContext {
   destinations: IDestination[];
   isLoading: boolean;
+  currentDestination: IDestination | undefined;
+  getDestination: (id: string) => void;
 }
 
 const DestinationContext = createContext<IDestinationContext | undefined>(
@@ -31,6 +33,9 @@ const DestinationContext = createContext<IDestinationContext | undefined>(
 const DestinationsProvider = ({ children }: Props) => {
   const [destinations, setDestinations] = useState<Array<IDestination>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentDestination, setCurrentDestination] = useState<
+    IDestination | undefined
+  >();
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -48,8 +53,23 @@ const DestinationsProvider = ({ children }: Props) => {
     fetchDestinations();
   }, []);
 
+  const getDestination = async (id: string) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${URL}/destinations/${id}`);
+      const data: IDestination = await response.json();
+      setCurrentDestination(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <DestinationContext.Provider value={{ destinations, isLoading }}>
+    <DestinationContext.Provider
+      value={{ destinations, isLoading, currentDestination, getDestination }}
+    >
       {children}
     </DestinationContext.Provider>
   );
