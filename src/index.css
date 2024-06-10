@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-montserrat: "Twemoji Country Flags" "Montserrat", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+
+  --color-primary: 0, 196, 106;
+  --color-secondary: 255, 181, 69;
+
+  --color-white: 255, 255, 255;
+  --color-light-1: 236, 236, 236;
+  --color-gray-1: 214, 222, 224;
+  --color-gray-2: 170, 170, 170;
+
+  --color-dark-1: 36, 42, 46;
+  --color-dark-2: 45, 52, 57;
+  --color-dark-3: 66, 72, 77;
+
+  --scrollbar-width: 1px;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+
+@layer base {
+  body {
+    @apply font-normal not-italic font-montserrat text-light-1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+/*
+
+
+
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+*/

@@ -1,0 +1,124 @@
+{
+  "destinations": [
+    {
+      "id": "1a2b",
+      "cityName": "Kyoto",
+      "country": "Japan",
+      "date": "Tue Jun 11 2024",
+      "emoji": "🇯🇵",
+      "notes": "I'm so excited to visit Kyoto! I can't wait to see the Fushimi Inari Shrine with its endless torii gates and explore the beautiful Arashiyama Bamboo Grove. The Kinkaku-ji (Golden Pavilion) is also on my must-see list.",
+      "position": {
+        "lat": 35.011636,
+        "lng": 135.768029
+      }
+    },
+    {
+      "id": "2b3c",
+      "cityName": "Reykjavik",
+      "country": "Iceland",
+      "date": "Wed Jun 12 2024",
+      "emoji": "🇮🇸",
+      "notes": "Reykjavik has always been a dream destination for me. I can't wait to soak in the Blue Lagoon's geothermal waters and see the city from the top of Hallgrimskirkja Church. Walking around the vibrant harbor will be amazing too!",
+      "position": {
+        "lat": 64.13548,
+        "lng": -21.89541
+      }
+    },
+    {
+      "id": "3c4d",
+      "cityName": "Cape Town",
+      "country": "South Africa",
+      "date": "Thu Jun 13 2024",
+      "emoji": "🇿🇦",
+      "notes": "Cape Town looks incredible! Hiking up Table Mountain for those breathtaking views is at the top of my list. I’m also excited to visit the V&A Waterfront and explore its shops and eateries.",
+      "position": {
+        "lat": -33.92487,
+        "lng": 18.42406
+      }
+    },
+    {
+      "id": "4d5e",
+      "cityName": "Buenos Aires",
+      "country": "Argentina",
+      "date": "Fri Jun 14 2024",
+      "emoji": "🇦🇷",
+      "notes": "I'm thrilled to visit Buenos Aires! Dancing tango at a local milonga sounds like an unforgettable experience. I also want to wander around the colorful neighborhood of La Boca and enjoy the city's vibrant atmosphere.",
+      "position": {
+        "lat": -34.60368,
+        "lng": -58.38156
+      }
+    },
+    {
+      "id": "5e6f",
+      "cityName": "Auckland",
+      "country": "New Zealand",
+      "date": "Sat Jun 15 2024",
+      "emoji": "🇳🇿",
+      "notes": "Auckland is going to be fantastic! Visiting the Sky Tower for panoramic views of the city is a must. I’m also planning to take a ferry to Waiheke Island to enjoy its wineries and stunning landscapes.",
+      "position": {
+        "lat": -36.84846,
+        "lng": 174.76333
+      }
+    },
+    {
+      "id": "6f7g",
+      "cityName": "Rome",
+      "country": "Italy",
+      "date": "Sun Jun 16 2024",
+      "emoji": "🇮🇹",
+      "notes": "Rome is full of history and culture! I'm eager to visit the Colosseum and the Roman Forum to walk through ancient history. The Vatican Museums and St. Peter's Basilica are also on my itinerary.",
+      "position": {
+        "lat": 41.90278,
+        "lng": 12.49636
+      }
+    },
+    {
+      "id": "7g8h",
+      "cityName": "Sydney",
+      "country": "Australia",
+      "date": "Mon Jun 17 2024",
+      "emoji": "🇦🇺",
+      "notes": "Sydney has so much to offer! I can't wait to see the Sydney Opera House and take a walk across the Harbour Bridge. Bondi Beach is also on my list for some relaxation and sunshine.",
+      "position": {
+        "lat": -33.86882,
+        "lng": 151.20929
+      }
+    },
+    {
+      "id": "8h9i",
+      "cityName": "Paris",
+      "country": "France",
+      "date": "Tue Jun 18 2024",
+      "emoji": "🇫🇷",
+      "notes": "Paris, the city of lights! Visiting the Eiffel Tower and taking a stroll along the Seine River are my top priorities. I’m also excited to see the art at the Louvre and enjoy some pastries at a local café.",
+      "position": {
+        "lat": 48.85661,
+        "lng": 2.35222
+      }
+    },
+    {
+      "id": "9i0j",
+      "cityName": "New York",
+      "country": "USA",
+      "date": "Wed Jun 19 2024",
+      "emoji": "🇺🇸",
+      "notes": "New York City is always buzzing with energy! I’m looking forward to visiting Times Square and Central Park. Catching a Broadway show and seeing the Statue of Liberty are also on my agenda.",
+      "position": {
+        "lat": 40.71278,
+        "lng": -74.00594
+      }
+    },
+    {
+      "id": "c739",
+      "cityName": "Ratnapura",
+      "country": "Sri Lanka",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇱🇰",
+      "notes": "i like to know about gems with my eyes!!!",
+      "position": {
+        "lat": 6.748977544201062,
+        "lng": 80.5793883418671
+      }
+    }
+  ]
+}
