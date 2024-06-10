@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 export interface IDestination {
   cityName: string;
@@ -28,28 +28,93 @@ interface IDestinationContext {
   deleteDestination: (id: string) => void;
 }
 
+interface IState {
+  isLoading: boolean;
+  error: string | null;
+  destinations: IDestination[];
+  currentDestination: IDestination | undefined;
+}
+
+const initialState: IState = {
+  destinations: [],
+  isLoading: false,
+  currentDestination: undefined,
+  error: "",
+};
+
+type Action =
+  | { type: "loading" }
+  | { type: "rejected"; payload: string }
+  | { type: "destinations/loaded"; payload: IDestination[] }
+  | { type: "destination/loaded"; payload: IDestination }
+  | { type: "destination/created"; payload: IDestination }
+  | { type: "destination/deleted"; payload: string };
+
+const reducer = (state: IState, action: Action): IState => {
+  switch (action.type) {
+    case "loading":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "rejected":
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case "destinations/loaded":
+      return {
+        ...state,
+        isLoading: false,
+        destinations: action.payload,
+      };
+
+    case "destination/loaded":
+      return {
+        ...state,
+        isLoading: false,
+        currentDestination: action.payload,
+      };
+
+    case "destination/created":
+      return {
+        ...state,
+        isLoading: false,
+        destinations: [...state.destinations, action.payload],
+      };
+    case "destination/deleted":
+      return {
+        ...state,
+        isLoading: false,
+        destinations: state.destinations.filter(
+          (destination) => destination.id !== action.payload
+        ),
+      };
+
+    default:
+      throw new Error(`Unknown action ${action}`);
+  }
+};
+
 const DestinationContext = createContext<IDestinationContext | undefined>(
   undefined
 );
 
 const DestinationsProvider = ({ children }: Props) => {
-  const [destinations, setDestinations] = useState<Array<IDestination>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [currentDestination, setCurrentDestination] = useState<
-    IDestination | undefined
-  >();
+  const [{ destinations, isLoading, currentDestination }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        setIsLoading(true);
+        dispatch({ type: "loading" });
         const response = await fetch(`${URL}/destinations`);
         const data: IDestination[] = await response.json();
-        setDestinations(data);
+        dispatch({ type: "destinations/loaded", payload: data });
       } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+        const typedError = error as Error;
+        dispatch({ type: "rejected", payload: typedError.message });
       }
     };
     fetchDestinations();
@@ -57,20 +122,19 @@ const DestinationsProvider = ({ children }: Props) => {
 
   const getDestination = async (id: string) => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "loading" });
       const response = await fetch(`${URL}/destinations/${id}`);
       const data: IDestination = await response.json();
-      setCurrentDestination(data);
+      dispatch({ type: "destination/loaded", payload: data });
     } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      const typedError = error as Error;
+      dispatch({ type: "rejected", payload: typedError.message });
     }
   };
 
   const createDestination = async (destination: Partial<IDestination>) => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "loading" });
       const response = await fetch(`${URL}/destinations/`, {
         method: "POST",
         headers: {
@@ -79,27 +143,22 @@ const DestinationsProvider = ({ children }: Props) => {
         body: JSON.stringify(destination),
       });
       const data: IDestination = await response.json();
-      setDestinations((destinations) => [...destinations, data]);
+      dispatch({ type: "destination/created", payload: data });
     } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      const typedError = error as Error;
+      dispatch({ type: "rejected", payload: typedError.message });
     }
   };
   const deleteDestination = async (id: string) => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "loading" });
       await fetch(`${URL}/destinations/${id}`, {
         method: "DELETE",
       });
-
-      setDestinations((destinations) =>
-        destinations.filter((destination) => destination.id !== id)
-      );
+      dispatch({ type: "destination/deleted", payload: id });
     } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      const typedError = error as Error;
+      dispatch({ type: "rejected", payload: typedError.message });
     }
   };
 
