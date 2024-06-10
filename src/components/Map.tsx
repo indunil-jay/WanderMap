@@ -9,11 +9,19 @@ import {
 import "leaflet/dist/leaflet.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { LeafletMouseEvent } from "leaflet";
+import L, { LeafletMouseEvent } from "leaflet";
 import { useGeolocation } from "../hooks/useGeoLocation";
 import Button from "./Button";
 import { useURLPosition } from "../hooks/useURLPosition";
 import { useDestination } from "../contexts/Destinations";
+
+const pin = "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png";
+const pinMB = L.icon({
+  iconUrl: pin,
+  iconSize: [24, 41],
+  iconAnchor: [0, 44],
+  popupAnchor: [12, -40],
+});
 
 const Map = () => {
   const [mapPosition, setMapPosition] = useState<[number, number]>([
@@ -59,6 +67,7 @@ const Map = () => {
           <Marker
             position={[destination.position.lat, destination.position.lng]}
             key={destination.id}
+            icon={pinMB}
           >
             <Popup>
               <span>{destination.emoji}</span>{" "}
