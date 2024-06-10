@@ -54,6 +54,13 @@ export default {
         ".label-1": {
           "@apply text-[1rem] xl:text-[1.125rem] uppercase font-semibold": {},
         },
+        ".italic-light-text": {
+          "@apply text-[1rem] xl:text-[1.125rem] text-light-1 font-extralight italic":
+            {},
+        },
+        ".heading-1": {
+          "@apply text-[2rem] lg:text-[3.4rem]  font-semibold": {},
+        },
       });
     }),
   ],

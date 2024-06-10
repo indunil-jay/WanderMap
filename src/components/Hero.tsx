@@ -7,8 +7,8 @@ const Hero = () => {
     <div className="flex flex-col w-full h-full">
       <Navigation />
 
-      <div className="text-center w-[90%] m-auto">
-        <h1 className="text-[4rem] font-semibold pointer-events-none">
+      <div className="text-center lg:w-[90%] m-auto">
+        <h1 className="heading-1 pointer-events-none">
           Map <span className="gradient-text-type-1">Your Dreams</span> and Plan
           Your Perfect
           <span className="block ">
@@ -16,7 +16,7 @@ const Hero = () => {
           </span>
         </h1>
 
-        <p className="text-[1.2rem] text-light-1 font-extralight w-[80%] mx-auto mt-10 italic pointer-events-none">
+        <p className="md:w-[80%] italic-light-text  mx-auto mt-4 lg:mt-10 pointer-events-none line-clamp-4">
           &quot; With WanderMap, marking your travel destinations has never been
           easier. Pin locations on a global map, view your marked spots, and add
           names and descriptions to each pin. Whether you're planning future
