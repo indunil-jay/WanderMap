@@ -13,17 +13,15 @@ import { LeafletMouseEvent } from "leaflet";
 import { useGeolocation } from "../hooks/useGeoLocation";
 import Button from "./Button";
 import { useURLPosition } from "../hooks/useURLPosition";
+import { useDestination } from "../contexts/Destinations";
 
 const Map = () => {
   const [mapPosition, setMapPosition] = useState<[number, number]>([
     7.303909698175265, 80.60415189943308,
   ]);
   const { geoPosition, getPosition, isGeoLocationLoading } = useGeolocation();
-
-  // const [searchParams] = useSearchParams();
-  // const lat = Number(searchParams.get("lat"));
-  // const lng = Number(searchParams.get("lng"));
   const { lat, lng } = useURLPosition();
+  const { destinations } = useDestination();
 
   useEffect(() => {
     if (lat && lng) {
@@ -56,11 +54,18 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={mapPosition}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {destinations.map((destination) => (
+          <Marker
+            position={[destination.position.lat, destination.position.lng]}
+            key={destination.id}
+          >
+            <Popup>
+              <span>{destination.emoji}</span>{" "}
+              <span>{destination.cityName}</span>
+            </Popup>
+          </Marker>
+        ))}
+
         <ChangeCenter position={mapPosition} />
         <DetectClick />
       </MapContainer>

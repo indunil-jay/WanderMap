@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IDestination, useDestination } from "../contexts/Destinations";
+import { MouseEvent } from "react";
 
 type Props = {
   destination: IDestination;
@@ -16,7 +17,12 @@ export const dateFormater = (date: string) => {
 
 const DestinationItem = ({ destination }: Props) => {
   const { cityName, id, date, emoji, position } = destination;
-  const { currentDestination } = useDestination();
+  const { currentDestination, deleteDestination } = useDestination();
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    deleteDestination(id);
+  };
 
   return (
     <Link
@@ -38,9 +44,12 @@ const DestinationItem = ({ destination }: Props) => {
           {dateFormater(date)}
         </time>
 
-        <div className="w-[2rem] h-[2rem] aspect-square rounded-full bg-dark-1 grid place-content-center hover:text-dark-3 font-montserrat font-semibold  cursor-pointer transition-all hover:bg-light-1  ">
+        <button
+          onClick={handleDelete}
+          className="w-[2rem] h-[2rem] aspect-square rounded-full bg-dark-1 grid place-content-center hover:text-dark-3 font-montserrat font-semibold  cursor-pointer transition-all hover:bg-light-1  "
+        >
           &times;
-        </div>
+        </button>
       </div>
     </Link>
   );

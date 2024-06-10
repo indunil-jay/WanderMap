@@ -10,7 +10,7 @@ export interface IDestination {
     lat: number;
     lng: number;
   };
-  id: number;
+  id: string;
 }
 
 const URL = "http://localhost:8000";
@@ -25,6 +25,7 @@ interface IDestinationContext {
   currentDestination: IDestination | undefined;
   getDestination: (id: string) => void;
   createDestination: (destination: Partial<IDestination>) => void;
+  deleteDestination: (id: string) => void;
 }
 
 const DestinationContext = createContext<IDestinationContext | undefined>(
@@ -66,6 +67,7 @@ const DestinationsProvider = ({ children }: Props) => {
       setIsLoading(false);
     }
   };
+
   const createDestination = async (destination: Partial<IDestination>) => {
     try {
       setIsLoading(true);
@@ -84,6 +86,22 @@ const DestinationsProvider = ({ children }: Props) => {
       setIsLoading(false);
     }
   };
+  const deleteDestination = async (id: string) => {
+    try {
+      setIsLoading(true);
+      await fetch(`${URL}/destinations/${id}`, {
+        method: "DELETE",
+      });
+
+      setDestinations((destinations) =>
+        destinations.filter((destination) => destination.id !== id)
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <DestinationContext.Provider
@@ -93,6 +111,7 @@ const DestinationsProvider = ({ children }: Props) => {
         currentDestination,
         getDestination,
         createDestination,
+        deleteDestination,
       }}
     >
       {children}
