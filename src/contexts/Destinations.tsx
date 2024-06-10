@@ -82,6 +82,7 @@ const reducer = (state: IState, action: Action): IState => {
         ...state,
         isLoading: false,
         destinations: [...state.destinations, action.payload],
+        currentDestination: action.payload,
       };
     case "destination/deleted":
       return {
@@ -121,6 +122,8 @@ const DestinationsProvider = ({ children }: Props) => {
   }, []);
 
   const getDestination = async (id: string) => {
+    //prevent re-fetching if id are same
+    if (Number(id) === Number(currentDestination?.id)) return;
     try {
       dispatch({ type: "loading" });
       const response = await fetch(`${URL}/destinations/${id}`);

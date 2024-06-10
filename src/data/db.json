@@ -107,6 +107,18 @@
         "lat": 40.71278,
         "lng": -74.00594
       }
+    },
+    {
+      "id": "c739",
+      "cityName": "Ratnapura",
+      "country": "Sri Lanka",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇱🇰",
+      "notes": "i like to know about gems with my eyes!!!",
+      "position": {
+        "lat": 6.748977544201062,
+        "lng": 80.5793883418671
+      }
     }
   ]
 }
