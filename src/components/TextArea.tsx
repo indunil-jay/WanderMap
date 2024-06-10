@@ -19,7 +19,7 @@ const TextArea = ({
 }: Props) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="destination" className="text-[18px] font-medium">
+      <label htmlFor={id} className="text-[18px] font-medium">
         {children}
       </label>
       <textarea

@@ -24,6 +24,7 @@ interface IDestinationContext {
   isLoading: boolean;
   currentDestination: IDestination | undefined;
   getDestination: (id: string) => void;
+  createDestination: (destination: Partial<IDestination>) => void;
 }
 
 const DestinationContext = createContext<IDestinationContext | undefined>(
@@ -65,10 +66,34 @@ const DestinationsProvider = ({ children }: Props) => {
       setIsLoading(false);
     }
   };
+  const createDestination = async (destination: Partial<IDestination>) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${URL}/destinations/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(destination),
+      });
+      const data: IDestination = await response.json();
+      setDestinations((destinations) => [...destinations, data]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <DestinationContext.Provider
-      value={{ destinations, isLoading, currentDestination, getDestination }}
+      value={{
+        destinations,
+        isLoading,
+        currentDestination,
+        getDestination,
+        createDestination,
+      }}
     >
       {children}
     </DestinationContext.Provider>

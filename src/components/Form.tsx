@@ -1,11 +1,13 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-import { dateFormater } from "./DestinationItem";
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useURLPosition } from "../hooks/useURLPosition";
 import Spinner from "./Spinner";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { IDestination, useDestination } from "../contexts/Destinations";
 
 const REVERSE_GEO_URL =
   "https://api.bigdatacloud.net/data/reverse-geocode-client?";
@@ -22,16 +24,16 @@ const Form = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
   const [country, setCountry] = useState<string>("");
-  const [dateTime, setDateTime] = useState<string>(
-    dateFormater(new Date().toDateString())
-  );
+  const [dateTime, setDateTime] = useState<Date | null>(new Date());
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const [errorLocation, setErrorLocation] = useState<string>("");
-  const [emoji, setEmoji] = useState<string>();
+  const [emoji, setEmoji] = useState<string>("");
   const { lat, lng } = useURLPosition();
+  const { createDestination, isLoading: createLoading } = useDestination();
 
   useEffect(() => {
+    if (!lat && !lng) return;
     const fetchDestinationData = async () => {
       try {
         setIsLoading(true);
@@ -63,16 +65,39 @@ const Form = () => {
   const handleDestination = (event: ChangeEvent<HTMLInputElement>) => {
     setDestination(event.target.value);
   };
-  const handleDateTime = (event: ChangeEvent<HTMLInputElement>) => {
-    setDateTime(event.target.value);
-  };
   const handleSetNote = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setNote(event.target.value);
   };
 
-  const handleSubmit = () => {
-    console.log(note, dateTime, destination);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!destination || !dateTime) return;
+
+    const newDestination: Partial<IDestination> = {
+      cityName: destination,
+      country,
+      date: dateTime.toDateString(),
+      emoji,
+      notes: note,
+      position: {
+        lat,
+        lng,
+      },
+    };
+    createDestination(newDestination);
+    navigate("/app");
   };
+
+  if (!lat && !lng) {
+    return (
+      <div className="border border-dashed border-secondary bg-secondary/20 rounded-md">
+        <span className="block p-8 text-[20px] text-light-0 font-medium w-[80%] mx-auto text-center">
+          Click somewhere on the map to get the location.
+        </span>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return <Spinner />;
@@ -92,7 +117,7 @@ const Form = () => {
     <div className="w-full h-[65vh]">
       <form
         action=""
-        className="flex flex-col gap-3 bg-dark-3 p-[3rem] "
+        className="flex flex-col gap-3 bg-dark-3 p-[3rem] disabled:opacity-25"
         onSubmit={handleSubmit}
       >
         <Input
@@ -104,15 +129,26 @@ const Form = () => {
         >
           Destination Name {emoji}
         </Input>
-        <Input
-          id="datetime"
-          type="text"
-          placeholderText="05/05/2024"
-          value={dateTime}
-          handleChange={handleDateTime}
-        >
-          When did you go to {country}?
-        </Input>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="datetime" className="text-[18px] font-medium">
+            When did you go to {country}?
+          </label>
+          <ReactDatePicker
+            id="datetime"
+            onChange={(date) => setDateTime(date)}
+            selected={dateTime}
+            dateFormat="dd/MM/yyyy"
+            className="w-full  rounded-lg bg-light-1 text-[20px] text-dark-1 px-5 py-3 font-medium
+            border-1 border-transparent shadow-md shadow-dark-3 placeholder-light-2
+            focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
+            disabled:bg-light-1/60 disabled:text-dark-3 disabled:border-light-0/50 disabled:shadow-none disabled:placeholder-dark-3
+            invalid:border-red-600 invalid:text-red-600
+            focus:invalid:border-red-600 focus:invalid:ring-red-600
+            caret-dark-3/50
+            "
+          />
+        </div>
 
         <TextArea
           id="note"
@@ -124,8 +160,8 @@ const Form = () => {
         </TextArea>
 
         <div className="flex justify-between items-center mt-8">
-          <Button onClick={() => {}}>Add</Button>
           <Button
+            disable={createLoading}
             fill={false}
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
@@ -134,6 +170,8 @@ const Form = () => {
           >
             &larr; Back
           </Button>
+
+          <Button disable={createLoading}>Add</Button>
         </div>
       </form>
     </div>

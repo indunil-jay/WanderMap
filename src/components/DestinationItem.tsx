@@ -37,9 +37,10 @@ const DestinationItem = ({ destination }: Props) => {
         <time className="text-[20px] font-light capitalize">
           {dateFormater(date)}
         </time>
-        <span className="w-[2rem] h-[2rem] aspect-square rounded-full bg-dark-1 text-[30px] font-medium flex items-center justify-center cursor-pointer transition-all hover:bg-light-1 hover:text-dark-3 ">
+
+        <div className="w-[2rem] h-[2rem] aspect-square rounded-full bg-dark-1 grid place-content-center hover:text-dark-3 font-montserrat font-semibold  cursor-pointer transition-all hover:bg-light-1  ">
           &times;
-        </span>
+        </div>
       </div>
     </Link>
   );
