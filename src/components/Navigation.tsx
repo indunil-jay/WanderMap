@@ -3,7 +3,11 @@ import { navigation } from "../constants";
 import Button from "./Button";
 import AppLogo from "./AppLogo";
 
-const Navigation = () => {
+const Navigation = ({
+  withLoginButton = true,
+}: {
+  withLoginButton?: boolean;
+}) => {
   const { pathname } = useLocation();
 
   return (
@@ -24,7 +28,11 @@ const Navigation = () => {
           ))}
         </ul>
 
-        <Button>Login</Button>
+        {withLoginButton && (
+          <Link to="login">
+            <Button>Login</Button>
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -37,13 +37,14 @@ const Map = () => {
 
   return (
     <div className="flex-1 h-full lg:h-screen bg-dark-3 p-[2rem] relative">
-      {geoPosition && (
+      {!geoPosition && (
         <div className="absolute !z-[99999999999] bottom-10 right-10">
           <Button onClick={getPosition}>
             {isGeoLocationLoading ? "Loading..." : "USE YOUR LOCATION"}
           </Button>
         </div>
       )}
+      {}
       <MapContainer
         center={mapPosition}
         zoom={6}
