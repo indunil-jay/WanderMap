@@ -13,6 +13,7 @@ import Form from "./components/Form";
 import { DestinationsProvider } from "./contexts/Destinations";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 import { AuthProvider } from "./contexts/Auth";
+import ProtectedRoute from "./pages/ProtectedRoute";
 polyfillCountryFlagEmojis(
   "var(--font-montserrat)",
   "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -26,7 +27,14 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
 
-            <Route path="/app" element={<AppLayout />}>
+            <Route
+              path="/app"
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Navigate to="destinations" replace />} />
               <Route path="destinations" element={<DestinationList />} />
               <Route path="destinations/:id" element={<DestinationDetails />} />

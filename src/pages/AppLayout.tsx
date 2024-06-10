@@ -7,7 +7,6 @@ const AppLayout = () => {
     <div className="flex flex-col lg:flex-row lg:h-screen relative ">
       <Sidebar />
       <Map />
-
       <User />
     </div>
   );

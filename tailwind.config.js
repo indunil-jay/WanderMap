@@ -1,4 +1,5 @@
 import plugin from "tailwindcss/plugin";
+const heroImage = "/home-cover.jpg";
 
 function colorWithOpacity(variableName) {
   return ({ opacityValue }) => {
@@ -29,8 +30,7 @@ export default {
         montserrat: "var(--font-montserrat)",
       },
       backgroundImage: {
-        "hero-image":
-          "linear-gradient(to right bottom, rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('./src/assets/home-cover.jpg')",
+        "hero-image": `linear-gradient(to right bottom, rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url(${heroImage})`,
       },
       keyframes: {
         rotate: {

@@ -1,5 +1,4 @@
 import { useAuth } from "../contexts/Auth";
-import Button from "./Button";
 
 const User = () => {
   const { user, isAuthenicated, logout } = useAuth();
@@ -8,11 +7,9 @@ const User = () => {
     window.location.href = "/";
   };
 
-  console.log(isAuthenicated);
-
   return (
     isAuthenicated && (
-      <div className="absolute top-10 right-10 !z-[999999999] bg-dark-3 flex items-center gap-4 px-6 py-2 rounded-md">
+      <div className="absolute top-2 right-2 xl:top-10 xl:right-10 !z-[999999999] bg-dark-3 flex items-center gap-4 px-6 py-2 rounded-md">
         <span className="text-[22px]">Welcome, {user?.email}</span>
         <button
           onClick={handleLogout}
