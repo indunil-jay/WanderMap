@@ -2,7 +2,7 @@ import { useDestination } from "../contexts/Destinations";
 import CountryItem from "./CountryItem";
 
 export interface IUniqueDestinationCountrty {
-  id: number;
+  id: string;
   country: string;
   emoji: string;
   date: string;
@@ -24,7 +24,7 @@ const CountriesList = () => {
   }, []);
 
   return (
-    <ul className="w-full h-[65vh] list-none overflow-x-hidden overflow-y-scroll grid grid-cols-2 content-start gap-4  ">
+    <ul className="w-full h-[65vh] list-none overflow-x-hidden overflow-y-scroll grid grid-cols-1 lg:grid-cols-2 content-start gap-4 max-w-max  ">
       {uniqueDestinations.map((destination) => (
         <CountryItem key={destination.id} destination={destination} />
       ))}
