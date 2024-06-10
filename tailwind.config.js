@@ -51,6 +51,9 @@ export default {
           "@apply bg-gradient-to-bl from-primary to-secondary text-transparent bg-clip-text":
             {},
         },
+        ".label-1": {
+          "@apply text-[1rem] xl:text-[1.125rem] uppercase font-semibold": {},
+        },
       });
     }),
   ],

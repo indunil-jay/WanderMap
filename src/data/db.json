@@ -23,6 +23,18 @@
         "lat": 7.536764322084078,
         "lng": 81.05712890625001
       }
+    },
+    {
+      "id": "5d02",
+      "cityName": "Harohalli",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "noytfy",
+      "position": {
+        "lat": 12.704650508287893,
+        "lng": 77.47558593750001
+      }
     }
   ]
 }

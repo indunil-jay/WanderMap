@@ -16,7 +16,7 @@ const Button = ({ children, onClick, fill = true, disable = false }: Props) => {
         fill
           ? "border-transparent bg-primary "
           : "border-light-1 hover:border-light"
-      }  hover:text-light uppercase text-[1.2rem] px-10 py-4 rounded-md disabled:opacity-25`}
+      }  hover:text-light  px-6 py-3 label-1 lg:px-10 lg:py-4 rounded-md disabled:opacity-25`}
     >
       {children}
     </button>
