@@ -4,15 +4,15 @@ import AppNav from "./AppNav";
 
 const Sidebar = () => {
   return (
-    <div className="basis-[42rem] bg-dark-2 py-[5rem] px-[3rem] flex flex-col items-center ">
+    <div className="w-full h-full lg:basis-[34rem] bg-dark-2 py-[2rem] lg:px-[2rem] flex flex-col items-center ">
       <AppLogo />
       <AppNav />
 
       <Outlet />
 
-      <footer className="mt-auto">
-        <p className="text-[1.2rem] text-light-2">
-          &copy; Copyright {new Date().getFullYear()} by WanderMao Inc.
+      <footer className="mt-auto hidden lg:block">
+        <p className="text-[1.2rem] font-light  text-light-2 pointer-events-none">
+          &copy; Copyright {new Date().getFullYear()} by WanderMap Inc.
         </p>
       </footer>
     </div>

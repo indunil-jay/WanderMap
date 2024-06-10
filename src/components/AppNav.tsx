@@ -5,7 +5,7 @@ const AppNav = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav className="mt-[3rem] mb-[2rem]">
+    <nav className="my-[2rem]">
       <ul className="flex bg-dark-3 rounded-full">
         {appnavigation.map((item) => (
           <Link

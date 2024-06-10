@@ -36,7 +36,7 @@ const Map = () => {
   }, [geoPosition]);
 
   return (
-    <div className="flex-1  bg-dark-3 relative isolate">
+    <div className="flex-1 lg:h-screen bg-dark-3 p-[2rem] relative isolate">
       {geoPosition && (
         <div className="absolute !z-[99999999999] bottom-10 right-10">
           <Button onClick={getPosition}>
@@ -48,7 +48,7 @@ const Map = () => {
         center={mapPosition}
         zoom={6}
         scrollWheelZoom={true}
-        className="h-full"
+        className="h-[30rem] mb-[5rem]  lg:h-screen"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

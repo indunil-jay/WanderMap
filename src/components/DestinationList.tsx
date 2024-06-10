@@ -8,7 +8,7 @@ const DestinationList = () => {
     return <Spinner />;
   }
   return (
-    <ul className="w-full h-[65vh] list-none overflow-x-hidden overflow-y-scroll flex flex-col gap-3  ">
+    <ul className="w-full h-[65vh] px-5 lg:px-0 list-none overflow-x-hidden overflow-y-scroll flex flex-col gap-3  ">
       {destinations.map((destination) => (
         <DestinationItem key={destination.id} destination={destination} />
       ))}

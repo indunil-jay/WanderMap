@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 
 const AppLayout = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col lg:flex-row lg:h-screen scroll-smooth">
       <Sidebar />
       <Map />
     </div>

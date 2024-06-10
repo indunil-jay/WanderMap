@@ -35,6 +35,66 @@
         "lat": 12.704650508287893,
         "lng": 77.47558593750001
       }
+    },
+    {
+      "id": "a7df",
+      "cityName": "Mannachanallur",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "some other",
+      "position": {
+        "lat": 10.961280524644431,
+        "lng": 78.75489881204679
+      }
+    },
+    {
+      "id": "63ab",
+      "cityName": "Udumalaippettai",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "anthe",
+      "position": {
+        "lat": 10.463341431389665,
+        "lng": 77.32684995415212
+      }
+    },
+    {
+      "id": "653b",
+      "cityName": "Heggadadevankote",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "ana\n",
+      "position": {
+        "lat": 11.843613991204396,
+        "lng": 76.22835435088002
+      }
+    },
+    {
+      "id": "c7fc",
+      "cityName": "Nidgundi",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "another\n",
+      "position": {
+        "lat": 16.382257912881347,
+        "lng": 75.89908466199518
+      }
+    },
+    {
+      "id": "a89b",
+      "cityName": "Nowrangapur",
+      "country": "India",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇮🇳",
+      "notes": "adajkda",
+      "position": {
+        "lat": 19.223327640874466,
+        "lng": 82.5399360490247
+      }
     }
   ]
 }
