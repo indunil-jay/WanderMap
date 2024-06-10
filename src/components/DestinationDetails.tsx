@@ -18,12 +18,12 @@ const DestinationDetails = () => {
 
   if (isLoading || !currentDestination) return <Spinner />;
 
-  const { cityName, date, notes, country } = currentDestination;
+  const { cityName, date, notes, country, emoji } = currentDestination;
 
   return (
     <div className="bg-dark-1  py-[4rem] px-[3rem] max-h-[80%] overflow-scroll overflow-x-hidden rounded-xl  w-full flex flex-col gap-5">
       <div className="flex items-center justify-center gap-5">
-        <span className="w-[6rem] h-[4rem] bg-white rounded-sm"></span>
+        <span className="w-[6rem] h-[4rem] bg-white rounded-sm">{emoji}</span>
         <span className="text-3xl font-medium capitalize">{country}</span>
       </div>
 

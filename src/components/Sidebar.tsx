@@ -4,7 +4,7 @@ import AppNav from "./AppNav";
 
 const Sidebar = () => {
   return (
-    <div className="basis-[56rem] bg-dark-2 py-[5rem] px-[3rem] flex flex-col items-center ">
+    <div className="basis-[42rem] bg-dark-2 py-[5rem] px-[3rem] flex flex-col items-center ">
       <AppLogo />
       <AppNav />
 

@@ -11,6 +11,11 @@ import CountriesList from "./components/CountriesList";
 import DestinationDetails from "./components/DestinationDetails";
 import Form from "./components/Form";
 import { DestinationsProvider } from "./contexts/Destinations";
+import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
+polyfillCountryFlagEmojis(
+  "var(--font-montserrat)",
+  "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+);
 
 const App = () => {
   return (

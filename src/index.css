@@ -5,7 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --font-montserrat: "Montserrat", sans-serif;
+  --font-montserrat: "Twemoji Country Flags" "Montserrat", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 
   --color-primary: 0, 196, 106;
   --color-secondary: 255, 181, 69;

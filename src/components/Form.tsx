@@ -10,6 +10,14 @@ import Spinner from "./Spinner";
 const REVERSE_GEO_URL =
   "https://api.bigdatacloud.net/data/reverse-geocode-client?";
 
+const convertToEmoji = (countryCode: string): string => {
+  const upperCaseCountryCode = countryCode.toUpperCase();
+  const codePoints = upperCaseCountryCode.split("").map((char) => {
+    return 127462 + char.charCodeAt(0) - "A".charCodeAt(0);
+  });
+  return String.fromCodePoint(...codePoints);
+};
+
 const Form = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
@@ -20,6 +28,7 @@ const Form = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const [errorLocation, setErrorLocation] = useState<string>("");
+  const [emoji, setEmoji] = useState<string>();
   const { lat, lng } = useURLPosition();
 
   useEffect(() => {
@@ -40,8 +49,10 @@ const Form = () => {
 
         setDestination(data.city || data.locality || "");
         setCountry(data.countryName);
-      } catch (error) {
-        setErrorLocation(error?.message);
+        setEmoji(convertToEmoji(data.countryCode));
+      } catch (error: unknown) {
+        const typedError = error as Error;
+        setErrorLocation(typedError?.message);
       } finally {
         setIsLoading(false);
       }
@@ -91,7 +102,7 @@ const Form = () => {
           value={destination}
           handleChange={handleDestination}
         >
-          Destination Name
+          Destination Name {emoji}
         </Input>
         <Input
           id="datetime"

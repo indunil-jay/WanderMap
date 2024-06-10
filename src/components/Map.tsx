@@ -15,7 +15,9 @@ import Button from "./Button";
 import { useURLPosition } from "../hooks/useURLPosition";
 
 const Map = () => {
-  const [mapPosition, setMapPosition] = useState<[number, number]>([90, 119]);
+  const [mapPosition, setMapPosition] = useState<[number, number]>([
+    7.303909698175265, 80.60415189943308,
+  ]);
   const { geoPosition, getPosition, isGeoLocationLoading } = useGeolocation();
 
   // const [searchParams] = useSearchParams();
