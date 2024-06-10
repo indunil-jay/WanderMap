@@ -48,7 +48,7 @@ const Map = () => {
         center={mapPosition}
         zoom={6}
         scrollWheelZoom={true}
-        className="h-[30rem] mb-[5rem]  lg:h-screen"
+        className="h-[30rem] mb-[8rem]  lg:h-screen"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

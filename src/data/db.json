@@ -95,6 +95,18 @@
         "lat": 19.223327640874466,
         "lng": 82.5399360490247
       }
+    },
+    {
+      "id": "6ae8",
+      "cityName": "Yangibozor Qishlog’i",
+      "country": "Uzbekistan",
+      "date": "Mon Jun 10 2024",
+      "emoji": "🇺🇿",
+      "notes": "m m",
+      "position": {
+        "lat": 40.32874883206875,
+        "lng": 63.67675781250001
+      }
     }
   ]
 }
