@@ -5,7 +5,9 @@ import AppNav from "./AppNav";
 const Sidebar = () => {
   return (
     <div className="w-full h-full lg:basis-[34rem] bg-dark-2 py-[2rem] lg:px-[2rem] flex flex-col items-center ">
-      <AppLogo />
+      <div className="mt-10 lg:mt-0">
+        <AppLogo />
+      </div>
       <AppNav />
 
       <Outlet />

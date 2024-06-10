@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import Navigation from "./Navigation";
+import { useAuth } from "../contexts/Auth";
 
 const Hero = () => {
+  const { isAuthenicated } = useAuth();
   return (
     <div className="flex flex-col w-full h-full">
       <Navigation />
@@ -28,7 +30,9 @@ const Hero = () => {
 
         <div className="mt-10">
           <Button>
-            <Link to="app">Start Pin Journeys &rarr;</Link>
+            <Link to={isAuthenicated ? "app" : "/login"}>
+              Start Pin Journeys &rarr;
+            </Link>
           </Button>
         </div>
       </div>
